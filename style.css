@@ -21,218 +21,169 @@ body::before {
     z-index: -1;
 }
 
-/* --- 2. BANNER DE COMANDO (ESTILO HUD/TECNOLÓGICO) --- */
-.admin-banner {
-    width: 90%;
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 50px 40px;
-    /* Gradiente metálico escuro */
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    border-radius: 8px; /* Bordas retas e técnicas */
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(6, 182, 212, 0.1);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(6, 182, 212, 0.3); /* Borda fina de neon */
-    box-sizing: border-box;
+/* --- 2. BANNER DE COMANDO (HUD TECNOLÓGICO) --- */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 10%;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-/* Linha de varredura (Scanline) no banner */
-.admin-banner::after {
+.header-container h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.header-container h2.imagem-rotativa {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    color: #fbfbfb;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    height: 150px;
+}
+
+.header-container h2 span {
+    position: absolute;
+    white-space: nowrap;
+    animation: blurCiclo 4.0s infinite ease-in-out;
+}
+
+.header-container h2::after {
     content: "";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 2px;
-    background: rgba(6, 182, 212, 0.2);
-    animation: scanline 4s linear infinite;
+    width: 130px; 
+    height: 130px;
+    background-image: url('icone\ sebo\ .WebP');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    opacity: 0;
+    filter: blur(15px);
+    animation: blurCiclo 4.0s infinite ease-in-out 2.0s;
 }
 
-@keyframes scanline {
-    0% { top: 0%; }
-    100% { top: 100%; }
+@keyframes blurCiclo {
+    0%, 100% { opacity: 0; filter: blur(10px); transform: scale(0.95); }
+    10%, 40% { opacity: 1; filter: blur(0px); transform: scale(1); }
 }
 
-.admin-content h1 {
-    flex: 1;
-    font-family: 'Orbitron', sans-serif; /* Fonte futurista recomendada */
-    font-size: clamp(2rem, 5vw, 3rem);
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #06b6d4; /* Ciano Neon */
-    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
-}
-
-.admin-description {
-    flex: 1;
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-    line-height: 1.6;
-    color: #94a3b8;
-    border-left: 2px solid #6366f1;
-    padding-left: 20px;
-}
-
-/* --- 3. CARROSSEL (GALERIA DE DADOS) --- */
-.imgg img {
-    flex: 0 0 240px;
-    height: 320px;
-    object-fit: cover;
-    border-radius: 4px !important; /* Bordas quadradas */
-    filter: grayscale(40%) contrast(1.1);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.imgg img:hover { 
-    transform: translateY(-10px);
-    filter: grayscale(0%) brightness(1.2);
-    border-color: #06b6d4;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-}
-
-/* --- 4. SETAS (INDICADORES DE NAVEGAÇÃO) --- */
-.seta-decorativa {
-    color: #06b6d4;
-    font-family: monospace;
-    opacity: 0.6;
-}
-
-/* --- 5. SEÇÃO DE COMPRA (PROTOCOLO DE AQUISIÇÃO) --- */
-.compra-infantil {
-    background: #0a0a0a;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.compra-infantil h1 {
-    font-family: 'Orbitron', sans-serif;
-    color: #f8fafc;
-}
-
-.btn-infantil {
-    background: transparent;
-    border: 2px solid #06b6d4;
-    color: #06b6d4 !important;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 2px;
-    border-radius: 0; /* Botão retangular */
-    box-shadow: none;
+/* --- 3. GALERIA (ESTANTE DE LIVROS ESPACIAL) --- */
+.galeria-wrapper {
     position: relative;
-    overflow: hidden;
-    animation: none; /* Remove o pulsar infantil */
-    transition: all 0.3s;
-}
-
-.btn-infantil:hover {
-    background: #06b6d4;
-    color: #000 !important;
-    box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
-    transform: skewX(-10deg); /* Inclinação estilosa */
-}
-
-/* Efeito de brilho ao passar o mouse */
-.btn-infantil::before {
-    content: "READY TO LAUNCH";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: rgba(255,255,255,0.2);
-    transition: 0.5s;
-}
-
-.btn-infantil:hover::before {
-    left: 100%;
-}
-/* --- CARROSSEL (ESTANTE DE LIVROS EM LINHA ÚNICA) --- */
-.imgg {
+    width: 95%;
+    max-width: 1300px;
+    margin: 40px auto;
     display: flex;
-    flex-wrap: nowrap; /* Garante que fiquem na mesma linha */
-    overflow-x: auto; /* Permite o scroll horizontal */
-    scroll-behavior: smooth;
+    align-items: center;
+}
+
+#galeria {
+    display: flex;
     gap: 30px;
-    padding: 40px 20px;
-    scrollbar-width: thin; /* Scrollbar mais discreta */
-    scrollbar-color: #6366f1 #020617;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 30px 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; /* Suporte Safari Mac/iOS */
 }
 
-/* Esconder scrollbar no Chrome/Safari para um visual mais limpo */
-.imgg::-webkit-scrollbar {
-    height: 6px;
-}
-.imgg::-webkit-scrollbar-thumb {
-    background: #6366f1;
-    border-radius: 10px;
-}
+#galeria::-webkit-scrollbar { display: none; }
 
-.imgg img {
-    /* O segredo para não esmagar as imagens na mesma linha: */
-    flex: 0 0 220px; 
-    height: 330px;
-    
+#galeria img {
+    flex: 0 0 auto; /* Impede achatamento no Mac/Safari */
+    height: 350px;
+    width: 230px;
     object-fit: cover;
-    /* Estética de Livro de Ficção */
+    /* Estética de Livro de Ficção: Lombada à esquerda */
     border-radius: 2px 12px 12px 2px !important; 
-    border-left: 5px solid #1e293b; /* Lombada do livro */
+    border-left: 5px solid #1e293b;
     box-shadow: 15px 10px 30px rgba(0, 0, 0, 0.6);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
+    -webkit-user-drag: none;
 }
 
-/* Efeito de abertura de livro ao passar o mouse */
-.imgg img:hover {
-    transform: perspective(1000px) rotateY(-25deg) translateX(10px);
+#galeria img:hover {
+    transform: perspective(1000px) rotateY(-25deg) translateX(10px) translateY(-10px);
     box-shadow: 25px 15px 40px rgba(99, 102, 241, 0.3);
+    border-left-color: #60a5fa;
 }
-/* --- SEÇÃO DE AQUISIÇÃO (FICÇÃO) --- */
+
+/* --- 4. BOTÕES MODERNOS (GLASSMORPHISM) --- */
+.btn-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 55px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Suporte Mac/Safari */
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+}
+
+.btn-nav:hover {
+    background: linear-gradient(135deg, #fff9c4 0%, #ffffff 100%);
+    color: #020617;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 249, 196, 0.4);
+}
+
+.btn-prev { left: -20px; }
+.btn-next { right: -20px; }
+
+/* --- 5. SEÇÃO DE AQUISIÇÃO (FICÇÃO) --- */
 .compra-infantil {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
     padding: 80px 20px;
-    /* Fundo escuro profundo com leve brilho azul no centro */
     background: radial-gradient(circle, #0f172a 0%, #020617 100%);
     border-top: 1px solid rgba(99, 102, 241, 0.2);
-    margin-top: 40px;
 }
 
 .compra-infantil h1 {
-    font-family: 'Playfair Display', serif; /* Mantendo a elegância de livro */
+    font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     color: #f8fafc;
-    text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 15px;
 }
 
-.compra-infantil p {
-    font-size: 1.1rem;
-    color: #94a3b8;
-    margin-bottom: 40px;
-    font-family: 'SF Pro Display', sans-serif;
-    letter-spacing: 0.5px;
-}
-
-/* --- BOTÃO ESTILO INTERFACE TECNOLÓGICA --- */
 .btn-infantil {
     display: inline-block;
     padding: 22px 60px;
-    /* Gradiente ciano/azul neon */
     background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
-    color: #60a5fa !important; /* Azul elétrico */
+    color: #60a5fa !important;
     text-decoration: none;
     font-weight: 700;
     font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 3px;
-    
-    /* Bordas retas e técnicas */
     border: 2px solid #60a5fa;
-    border-radius: 0px; 
-    
-    /* Efeito de brilho externo */
-    box-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
     transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    position: relative;
-    cursor: pointer;
     overflow: hidden;
 }
 
@@ -240,23 +191,22 @@ body::before {
     background: #60a5fa;
     color: #020617 !important;
     box-shadow: 0 0 35px rgba(96, 165, 250, 0.6);
-    transform: translateY(-3px);
+    transform: skewX(-5deg) translateY(-3px);
 }
 
-.btn-infantil:active {
-    transform: translateY(1px);
-}
-
-/* Detalhe de linha de carregamento no hover */
-.btn-infantil::after {
-    content: "";
-    position: absolute;
-    width: 100%; height: 100%;
-    top: 0; left: -100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: 0.5s;
-}
-
-.btn-infantil:hover::after {
-    left: 100%;
+/* --- 6. ADAPTAÇÃO MOBILE --- */
+@media (max-width: 768px) {
+    .header-container { padding: 40px 5%; justify-content: center; }
+    
+    #galeria img { 
+        height: 280px; 
+        width: 180px; 
+    }
+    
+    .btn-nav { width: 45px; height: 45px; }
+    .btn-prev { left: 5px; } 
+    .btn-next { right: 5px; }
+    
+    .header-container h2.imagem-rotativa { min-width: 100%; }
+    .btn-infantil { width: 100%; padding: 18px 20px; }
 }
